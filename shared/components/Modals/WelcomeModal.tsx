@@ -20,7 +20,7 @@ import usePreferencesStore from '@/features/Preferences/store/usePreferencesStor
 import { useClick } from '@/shared/hooks/useAudio';
 import { buttonBorderStyles, cardBorderStyles } from '@/shared/lib/styles';
 import themeSets from '@/features/Preferences/data/themes';
-import fonts from '@/features/Preferences/data/fonts';
+import { modalFonts } from '@/shared/components/Modals/data/modalFonts';
 
 const WelcomeModal = () => {
   const { playClick } = useClick();
@@ -429,7 +429,7 @@ const WelcomeModal = () => {
                 onClick={() => {
                   playClick();
                   const randomFont =
-                    fonts[Math.floor(Math.random() * fonts.length)];
+                    modalFonts[Math.floor(Math.random() * modalFonts.length)];
                   setLocalFont(randomFont.name);
                   setFont(randomFont.name);
                 }}
@@ -440,7 +440,7 @@ const WelcomeModal = () => {
             </div>
 
             <div className='scrollbar-thin scrollbar-thumb-[var(--border-color)] scrollbar-track-transparent max-h-80 space-y-3 overflow-y-auto p-1 pr-2'>
-              {fonts.map((fontObj: (typeof fonts)[number]) => (
+              {modalFonts.map((fontObj: (typeof modalFonts)[number]) => (
                 <button
                   key={fontObj.name}
                   className={clsx(
@@ -470,6 +470,11 @@ const WelcomeModal = () => {
                   </div>
                 </button>
               ))}
+              <div className='mt-4 rounded-lg bg-[var(--background-color)] p-3 text-center'>
+                <p className='text-sm text-[var(--secondary-color)]'>
+                  💡 More fonts available in <strong>Preferences</strong>
+                </p>
+              </div>
             </div>
           </div>
         );
