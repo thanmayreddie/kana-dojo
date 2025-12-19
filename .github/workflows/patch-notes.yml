@@ -91,15 +91,15 @@ jobs:
                 description: description.trim(),
                 color: embedColor,
                 timestamp: new Date().toISOString(),
-                footer: { text: `かな道場 • ${latest.date}`, icon_url: 'https://kanadojo.com/favicon.ico' },
-                author: { name: 'KanaDojo Release', url: 'https://kanadojo.com', icon_url: 'https://kanadojo.com/favicon.ico' }
+                footer: { text: `かな道場 • ${latest.date}`, icon_url: 'https://kanadojo.com/kanadojo.png' },
+                author: { name: 'KanaDojo Release', url: 'https://kanadojo.com', icon_url: 'https://kanadojo.com/kanadojo.png' }
               };
 
               const payload = {
                 content: `🎊 **New update available!** KanaDojo ${latest.version} is now live.`,
                 embeds: [embed],
                 username: 'KanaDojo',
-                avatar_url: 'https://kanadojo.com/favicon.ico'
+                avatar_url: 'https://kanadojo.com/kanadojo.png'
               };
 
               const webhookUrl = new URL(process.env.WEBHOOK_URL);
@@ -113,31 +113,31 @@ jobs:
               };
 
               const req = https.request(options, (res) => {
-                console.log(`📡 Discord webhook status: ${res.statusCode}`);
+                console.log(`Discord webhook status: ${res.statusCode}`);
                 let body = '';
                 res.on('data', chunk => body += chunk);
                 res.on('end', () => {
                   if (res.statusCode >= 200 && res.statusCode < 300) {
-                    console.log('✅ Patch notes sent successfully to Discord!');
-                    console.log(`📦 Version: ${latest.version}`);
-                    console.log(`📅 Date: ${latest.date}`);
-                    console.log(`📝 Changes: ${latest.changes.length} items`);
+                    console.log('Patch notes sent successfully to Discord!');
+                    console.log(`Version: ${latest.version}`);
+                    console.log(`Date: ${latest.date}`);
+                    console.log(`Changes: ${latest.changes.length} items`);
                   } else {
-                    console.error('❌ Discord API error:', body);
+                    console.error('Discord API error:', body);
                     process.exit(1);
                   }
                 });
               });
 
               req.on('error', (error) => {
-                console.error('❌ Request failed:', error.message);
+                console.error('Request failed:', error.message);
                 process.exit(1);
               });
 
               req.write(data);
               req.end();
             } catch (error) {
-              console.error('❌ Error processing patch notes:', error.message);
+              console.error('Error processing patch notes:', error.message);
               process.exit(1);
             }
           }
