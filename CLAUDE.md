@@ -52,11 +52,11 @@ This means Claude Code can run verification, testing, file editing, and most dev
 
 ---
 
-## ⚠️ IMPORTANT: Git Commit Requirement
+## ⚠️ IMPORTANT: Git Commit Instructions
 
-**After completing any code changes, you MUST automatically run `git add` and `git commit` commands with a descriptive conventional commit message.**
+**After completing any code changes, you MUST provide a git commit command for the user to execute manually.**
 
-✅ **Automatically execute git commands** - Claude Code will stage and commit changes after completing tasks.
+✅ **Provide commit commands** - Claude Code will draft descriptive conventional commit messages and provide the full command for you to run.
 
 Always use multiple `-m` flags for multiline commit messages:
 
@@ -83,7 +83,8 @@ git add -A && git commit -m "feat(kana): add dakuon character support" -m "Added
 
 **Important Notes:**
 
-- Git commits are executed automatically after code changes
+- Git commit commands are provided but NOT executed automatically
+- User maintains full control over when commits are created
 - Git push is NOT automatic - you maintain control over what goes to remote
 - Commits follow conventional commit format for clear history
 - Keep commit messages concise and professional without unnecessary footers
