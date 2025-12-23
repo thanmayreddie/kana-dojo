@@ -7,6 +7,7 @@ import useKanaStore from '@/features/Kana/store/useKanaStore';
 import usePreferencesStore from '@/features/Preferences/store/usePreferencesStore';
 import { useClick } from '@/shared/hooks/useAudio';
 import { ActionButton } from '@/shared/components/ui/ActionButton';
+import { cn } from '@/shared/lib/utils';
 
 interface SubsetProps {
   sliceRange: number[];
@@ -128,10 +129,10 @@ const Subset = ({ sliceRange, subgroup }: SubsetProps) => {
             selectAllInSubset();
           }}
           borderRadius='3xl'
-          borderBottomThickness={8}
+          borderBottomThickness={10}
         >
+          <MousePointer size={22} className={cn('fill-current')} />
           <span>select all {subgroup.slice(1).toLowerCase()}</span>
-          <MousePointer size={22} />
         </ActionButton>
       </div>
     </fieldset>

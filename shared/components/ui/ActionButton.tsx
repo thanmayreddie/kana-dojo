@@ -29,7 +29,9 @@ const actionButtonVariants = cva(
         2: 'border-b-2 active:border-b-0 active:translate-y-[2px] active:mb-[2px]',
         4: 'border-b-4 active:border-b-0 active:translate-y-[4px] active:mb-[4px]',
         6: 'border-b-6 active:border-b-0 active:translate-y-[6px] active:mb-[6px]',
-        8: 'border-b-8 active:border-b-0 active:translate-y-[8px] active:mb-[8px]'
+        8: 'border-b-8 active:border-b-0 active:translate-y-[8px] active:mb-[8px]',
+        10: 'border-b-10 active:border-b-0 active:translate-y-[10px] active:mb-[10px]',
+        12: 'border-b-12 active:border-b-0 active:translate-y-[12px] active:mb-[12px]'
       }
     },
     defaultVariants: {

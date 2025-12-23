@@ -349,8 +349,8 @@ const SelectionStatusBar = () => {
             <ActionButton
               // colorScheme='main'
               borderColorScheme='main'
-              borderRadius='2xl'
-              borderBottomThickness={8}
+              borderRadius='3xl'
+              borderBottomThickness={10}
               className='w-auto bg-[var(--main-color)]/80 px-4 py-3 lg:px-6'
               onClick={handleClear}
               aria-label='Clear selected levels'

@@ -15,6 +15,7 @@ import { kana } from '@/features/Kana/data/kana';
 import useKanaStore from '@/features/Kana/store/useKanaStore';
 import { useClick } from '@/shared/hooks/useAudio';
 import SidebarLayout from '@/shared/components/layout/SidebarLayout';
+import { cn } from '@/shared/lib/utils';
 
 const DojoMenu = () => {
   const { playClick } = useClick();
@@ -38,9 +39,10 @@ const DojoMenu = () => {
               addKanaGroupIndices(indices);
             }}
             className='px-2 py-3'
-            borderBottomThickness={8}
+            borderBottomThickness={10}
+            borderRadius='3xl'
           >
-            <MousePointer />
+            <MousePointer className={cn('fill-current')} />
             Select All Kana
           </ActionButton>
           <KanaCards />

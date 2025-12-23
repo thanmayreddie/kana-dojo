@@ -59,7 +59,7 @@ export default function StreakProgress() {
                 }}
                 colorScheme={isSelected ? 'main' : undefined}
                 borderColorScheme={isSelected ? 'main' : undefined}
-                borderBottomThickness={isSelected ? 8 : 0}
+                borderBottomThickness={isSelected ? 10 : 0}
                 borderRadius='3xl'
                 className={
                   isSelected

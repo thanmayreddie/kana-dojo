@@ -331,7 +331,7 @@ const GameModes = ({
           {/* Header */}
           <div className='space-y-3 text-center'>
             <Play size={56} className='mx-auto text-[var(--main-color)]' />
-            <h1 className='text-2xl font-bold text-[var(--secondary-color)]'>
+            <h1 className='text-2xl font-bold text-[var(--main-color)]'>
               {dojoLabel}{' '}
               {mode === 'blitz'
                 ? 'Blitz'
@@ -339,8 +339,8 @@ const GameModes = ({
                   ? 'Gauntlet'
                   : 'Training'}
             </h1>
-            <p className='text-[var(--muted-color)]'>
-              Choose your training mode
+            <p className='text-[var(--secondary-color)]'>
+              Practice in a classic, endless way
             </p>
           </div>
 
@@ -367,7 +367,7 @@ const GameModes = ({
                     setSelectedGameMode(mode.id);
                   }}
                   className={clsx(
-                    'w-full rounded-xl p-5 text-left hover:cursor-pointer',
+                    'w-full rounded-2xl p-5 text-left hover:cursor-pointer',
                     'flex items-center gap-4 border-2 bg-[var(--card-color)]',
                     isSelected
                       ? 'border-[var(--main-color)]'
@@ -469,10 +469,10 @@ const GameModes = ({
           <div className='mx-auto flex w-full max-w-4xl flex-row items-center justify-center gap-2 md:gap-4'>
             <button
               className={clsx(
-                'flex h-12 w-1/2 flex-row items-center justify-center gap-2 px-2 sm:px-6',
+                'flex w-1/2 flex-row items-center justify-center gap-2 px-2 py-3 sm:px-6',
                 'bg-[var(--secondary-color)] text-[var(--background-color)]',
-                'rounded-2xl transition-colors duration-200',
-                'border-b-8 border-[var(--secondary-color-accent)] ',
+                'rounded-3xl transition-colors duration-200',
+                'border-b-10 border-[var(--secondary-color-accent)]',
                 'hover:cursor-pointer'
               )}
               onClick={() => {
@@ -508,15 +508,19 @@ const GameModes = ({
               <button
                 disabled={!selectedGameMode}
                 className={clsx(
-                  'flex h-12 w-full flex-row items-center justify-center gap-2 px-2 sm:px-6',
-                  'rounded-2xl transition-colors duration-200',
-                  'border-b-8 font-medium ',
+                  'flex w-full flex-row items-center justify-center gap-2 px-2 py-3 sm:px-6',
+                  'rounded-3xl transition-colors duration-200',
+                  'border-b-10',
                   'hover:cursor-pointer',
                   selectedGameMode
                     ? 'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)]'
                     : 'cursor-not-allowed bg-[var(--card-color)] text-[var(--border-color)]'
                 )}
               >
+                <Play
+                  className={clsx(selectedGameMode && 'fill-current')}
+                  size={20}
+                />
                 <span className='whitespace-nowrap'>
                   {mode === 'blitz'
                     ? 'Start Blitz'
@@ -524,10 +528,6 @@ const GameModes = ({
                       ? 'Start Gauntlet'
                       : 'Start Training'}
                 </span>
-                <Play
-                  className={clsx(selectedGameMode && 'fill-current')}
-                  size={20}
-                />
               </button>
             </Link>
           </div>
@@ -577,7 +577,7 @@ function SelectedLevelsCard({
   };
 
   return (
-    <div className='rounded-lg bg-[var(--card-color)] p-4'>
+    <div className='rounded-xl bg-[var(--card-color)] p-4'>
       <div className='flex flex-col gap-2'>
         <div className='flex flex-row items-center gap-2'>
           <CheckCircle2

@@ -19,6 +19,7 @@ import useGridColumns from '@/shared/hooks/useGridColumns';
 import { useClick } from '@/shared/hooks/useAudio';
 import { ActionButton } from '@/shared/components/ui/ActionButton';
 import QuickSelectModal from '@/shared/components/Modals/QuickSelectModal';
+import { cn } from '@/shared/lib/utils';
 
 type MasteryStats = {
   correct: number;
@@ -330,10 +331,10 @@ const LevelSetCards = <TLevel extends string, TItem>({
           setIsModalOpen(true);
         }}
         className='px-2 py-3 opacity-90'
-        // borderRadius='3xl'
-        borderBottomThickness={8}
+        borderRadius='3xl'
+        borderBottomThickness={10}
       >
-        <MousePointer />
+        <MousePointer className={cn('fill-current')} />
         Quick Select
       </ActionButton>
 
@@ -452,7 +453,7 @@ const LevelSetCards = <TLevel extends string, TItem>({
                           'text-2xl flex justify-center items-center gap-2 group',
                           'rounded-3xl  hover:cursor-pointer',
                           'duration-250 transition-all ease-in-out',
-                          'px-2 py-3 max-md:mx-4 border-b-8',
+                          'px-2 py-3 max-md:mx-4 border-b-10',
                           isSelected
                             ? 'bg-[var(--secondary-color)] text-[var(--background-color)] border-[var(--secondary-color-accent)]'
                             : 'bg-[var(--background-color)] border-[var(--border-color)] hover:border-[var(--main-color)]/70'

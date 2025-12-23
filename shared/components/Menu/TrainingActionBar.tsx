@@ -194,7 +194,7 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
               'fixed z-40',
               'bg-[var(--background-color)]',
               'border-t-2 border-[var(--border-color)]',
-              'px-4 py-3'
+              'px-2 py-3'
             )}
           >
             <div
@@ -203,72 +203,80 @@ const TrainingActionBar: React.FC<ITopBarProps> = ({
                 'mx-auto w-full max-w-4xl'
               )}
             >
-              {/* Blitz Button */}
-              {showBlitz && (
-                <button
-                  className={clsx(
-                    'flex h-12 max-w-sm flex-1 flex-row items-center justify-center gap-2 px-2 sm:px-6',
-                    'bg-[var(--secondary-color)] text-[var(--background-color)]',
-                    'rounded-2xl transition-colors duration-200',
-                    'border-b-8 border-[var(--secondary-color-accent)] shadow-sm',
-                    'hover:cursor-pointer'
-                  )}
-                  onClick={e => {
-                    e.currentTarget.blur();
-                    playClick();
+              {[
+                {
+                  id: 'blitz',
+                  label: 'Blitz',
+                  Icon: Zap,
+                  iconClassName: 'fill-current motion-safe:animate-none',
+                  show: showBlitz,
+                  colorScheme: 'secondary' as const,
+                  onClick: () => {
                     setGameModesMode('blitz');
                     setShowGameModesModal(true);
-                  }}
-                >
-                  <Zap size={20} className={cn('fill-current motion-safe:animate-none ')} />
-                  <span className='whitespace-nowrap'>Blitz</span>
-                </button>
-              )}
-
-              {/* Gauntlet Button */}
-              {showBlitz && (
-                <button
-                  className={clsx(
-                    'flex h-12 max-w-sm flex-1 flex-row items-center justify-center gap-2 px-2 sm:px-6',
-                    'bg-[var(--secondary-color)] text-[var(--background-color)]',
-                    'rounded-2xl transition-colors duration-200',
-                    'border-b-8 border-[var(--secondary-color-accent)] shadow-sm',
-                    'hover:cursor-pointer'
-                  )}
-                  onClick={e => {
-                    e.currentTarget.blur();
-                    playClick();
-                    setShowGauntletModal(true);
-                  }}
-                >
-                  <Swords size={20} className={cn('fill-current')} />
-                  <span className='whitespace-nowrap'>Gauntlet</span>
-                </button>
-              )}
-
-              {/* Start Training Button - Opens Modal */}
-              <button
-                ref={buttonRef}
-                disabled={!isFilled}
-                className={clsx(
-                  'flex h-12 max-w-sm flex-1 flex-row items-center justify-center gap-2 px-2 sm:px-6',
-                  'rounded-2xl transition-colors duration-200',
-                  'border-b-8',
-                  'hover:cursor-pointer',
-                  isFilled
-                    ? 'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)]'
-                    : 'cursor-not-allowed bg-[var(--card-color)] text-[var(--border-color)]'
+                  }
+                },
+                {
+                  id: 'gauntlet',
+                  label: 'Gauntlet',
+                  Icon: Swords,
+                  iconClassName: 'fill-current',
+                  show: showBlitz,
+                  colorScheme: 'secondary' as const,
+                  onClick: () => setShowGauntletModal(true)
+                },
+                {
+                  id: 'classic',
+                  label: 'Classic',
+                  Icon: Play,
+                  iconClassName: isFilled ? 'fill-current' : '',
+                  show: true,
+                  colorScheme: 'primary' as const,
+                  onClick: () => {
+                    setGameModesMode('train');
+                    setShowGameModesModal(true);
+                  },
+                  ref: buttonRef
+                }
+              ]
+                .filter(btn => btn.show)
+                .map(
+                  ({
+                    id,
+                    label,
+                    Icon,
+                    iconClassName,
+                    colorScheme,
+                    onClick,
+                    ref
+                  }) => (
+                    <button
+                      key={id}
+                      ref={ref}
+                      disabled={id === 'classic' && !isFilled}
+                      className={cn(
+                        'flex max-w-sm flex-1 flex-row items-center justify-center gap-2 px-2 py-3 sm:px-6',
+                        'rounded-3xl transition-colors duration-200',
+                        'border-b-10',
+                        'hover:cursor-pointer',
+                        colorScheme === 'secondary' &&
+                          'border-[var(--secondary-color-accent)] bg-[var(--secondary-color)] text-[var(--background-color)]',
+                        colorScheme === 'primary' &&
+                          (isFilled
+                            ? 'border-[var(--main-color-accent)] bg-[var(--main-color)] text-[var(--background-color)]'
+                            : 'cursor-not-allowed bg-[var(--card-color)] text-[var(--border-color)]')
+                      )}
+                      onClick={e => {
+                        e.currentTarget.blur();
+                        playClick();
+                        onClick();
+                      }}
+                    >
+                      <Icon size={20} className={iconClassName} />
+                      <span className='whitespace-nowrap'>{label}</span>
+                    </button>
+                  )
                 )}
-                onClick={e => {
-                  e.currentTarget.blur();
-                  playClick();
-                  setGameModesMode('train');
-                  setShowGameModesModal(true);
-                }}
-              >
-                <Play className={clsx(isFilled && 'fill-current')} size={20} />
-                <span className='whitespace-nowrap'>Classic</span>
-              </button>
             </div>
           </motion.div>
         )}
