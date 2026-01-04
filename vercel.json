@@ -36,7 +36,7 @@
       ]
     },
     {
-      "source": "/kanji/(.*)",
+      "source": "/kanji/:path*.json",
       "headers": [
         {
           "key": "Cache-Control",
@@ -45,7 +45,7 @@
       ]
     },
     {
-      "source": "/vocab/(.*)",
+      "source": "/vocab/:path*.json",
       "headers": [
         {
           "key": "Cache-Control",
