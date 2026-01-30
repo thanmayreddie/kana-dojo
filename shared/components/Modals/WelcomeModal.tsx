@@ -46,9 +46,7 @@ const WelcomeModal = () => {
     state => state.setHasSeenWelcome,
   );
 
-  const [step, setStep] = useState<'welcome' | 'themes' | 'fonts' | 'complete'>(
-    'welcome',
-  );
+  const [step, setStep] = useState<'welcome' | 'themes' | 'fonts'>('welcome');
   const [isVisible, setIsVisible] = useState(false);
 
   const {
@@ -120,10 +118,7 @@ const WelcomeModal = () => {
     } else if (step === 'themes') {
       setStep('fonts');
     } else if (step === 'fonts') {
-      setStep('complete');
-      setTimeout(() => {
-        handleClose();
-      }, 10000);
+      handleClose();
     }
   };
 
@@ -543,7 +538,7 @@ const WelcomeModal = () => {
           </div>
         );
 
-      case 'complete':
+      /* case 'complete':
         return (
           <div className='space-y-6 text-center'>
             <div className='space-y-2'>
@@ -564,7 +559,7 @@ const WelcomeModal = () => {
               </p>
             </div>
           </div>
-        );
+        ); */
 
       default:
         return null;
@@ -609,30 +604,26 @@ const WelcomeModal = () => {
                   className='flex gap-1'
                   role='progressbar'
                   aria-valuenow={
-                    ['welcome', 'themes', 'fonts', 'complete'].indexOf(step) + 1
+                    ['welcome', 'themes', 'fonts'].indexOf(step) + 1
                   }
-                  aria-valuemax={4}
+                  aria-valuemax={3}
                 >
-                  {['welcome', 'themes', 'fonts', 'complete'].map(
-                    (stepName, index) => {
-                      const isActive =
-                        ['welcome', 'themes', 'fonts', 'complete'].indexOf(
-                          step,
-                        ) >= index;
-                      return (
-                        <div
-                          key={stepName}
-                          className={clsx(
-                            'h-2 w-2 rounded-full transition-all duration-300',
-                            isActive
-                              ? 'scale-110 bg-[var(--main-color)]'
-                              : 'scale-100 bg-[var(--border-color)]',
-                          )}
-                          title={`Step ${index + 1}: ${stepName}`}
-                        />
-                      );
-                    },
-                  )}
+                  {['welcome', 'themes', 'fonts'].map((stepName, index) => {
+                    const isActive =
+                      ['welcome', 'themes', 'fonts'].indexOf(step) >= index;
+                    return (
+                      <div
+                        key={stepName}
+                        className={clsx(
+                          'h-2 w-2 rounded-full transition-all duration-300',
+                          isActive
+                            ? 'scale-110 bg-[var(--main-color)]'
+                            : 'scale-100 bg-[var(--border-color)]',
+                        )}
+                        title={`Step ${index + 1}: ${stepName}`}
+                      />
+                    );
+                  })}
                 </div>
               </div>
 
@@ -655,52 +646,47 @@ const WelcomeModal = () => {
           </div>
 
           {/* Actions */}
-          {step !== 'complete' && (
-            <div className='sticky bottom-0 border-t border-[var(--border-color)]/30 bg-[var(--card-color)] p-3 pt-3 sm:p-5'>
-              <div className='flex items-center justify-between'>
-                {step !== 'welcome' ? (
-                  <button
-                    onClick={handlePrevious}
-                    className={clsx(
-                      'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 sm:px-6 sm:py-3',
-                      'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
-                      'transition-all duration-200 hover:bg-[var(--background-color)]',
-                      'text-sm sm:text-base',
-                    )}
-                  >
-                    <ChevronLeft
-                      size={16}
-                      className='sm:h-[18px] sm:w-[18px]'
-                    />
-                    <span className='hidden sm:inline'>
-                      {t('navigation.previous')}
-                    </span>
-                    <span className='sm:hidden'>{t('navigation.back')}</span>
-                  </button>
-                ) : (
-                  <div />
-                )}
-
+          <div className='sticky bottom-0 border-t border-[var(--border-color)]/30 bg-[var(--card-color)] p-3 pt-3 sm:p-5'>
+            <div className='flex items-center justify-between'>
+              {step !== 'welcome' ? (
                 <button
-                  onClick={handleNext}
+                  onClick={handlePrevious}
                   className={clsx(
-                    'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-2 sm:px-8 sm:py-3',
-                    'text-sm font-medium text-[var(--main-color)] sm:text-base',
-                    'transition-all duration-200 hover:bg-[var(--background-color)] active:scale-98',
+                    'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-2 sm:px-6 sm:py-3',
+                    'text-[var(--secondary-color)] hover:text-[var(--main-color)]',
+                    'transition-all duration-200 hover:bg-[var(--background-color)]',
+                    'text-sm sm:text-base',
                   )}
                 >
-                  <span>
-                    {step === 'welcome'
-                      ? t('navigation.getStarted')
-                      : step === 'fonts'
-                        ? t('navigation.finishSetup')
-                        : t('navigation.next')}
+                  <ChevronLeft size={16} className='sm:h-[18px] sm:w-[18px]' />
+                  <span className='hidden sm:inline'>
+                    {t('navigation.previous')}
                   </span>
-                  <ChevronRight size={16} className='sm:h-[18px] sm:w-[18px]' />
+                  <span className='sm:hidden'>{t('navigation.back')}</span>
                 </button>
-              </div>
+              ) : (
+                <div />
+              )}
+
+              <button
+                onClick={handleNext}
+                className={clsx(
+                  'flex cursor-pointer items-center justify-center gap-2 rounded-xl px-6 py-2 sm:px-8 sm:py-3',
+                  'text-sm font-medium text-[var(--main-color)] sm:text-base',
+                  'transition-all duration-200 hover:bg-[var(--background-color)] active:scale-98',
+                )}
+              >
+                <span>
+                  {step === 'welcome'
+                    ? t('navigation.getStarted')
+                    : step === 'fonts'
+                      ? t('navigation.finishSetup')
+                      : t('navigation.next')}
+                </span>
+                <ChevronRight size={16} className='sm:h-[18px] sm:w-[18px]' />
+              </button>
             </div>
-          )}
+          </div>
         </motion.div>
       </motion.div>
     </AnimatePresence>
